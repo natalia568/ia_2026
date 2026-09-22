@@ -39,6 +39,18 @@ source .venv/bin/activate
 ```
 
 Windows:
+
+Abans de la primera vegada que s'executi amb Windows s'han de fer les següents passes:
+
+1. Obrir la `Terminal` amb mode administrador.
+2. Executar la següent comanda: 
+
+```
+Set-ExecutionPolicy unrestricted
+```
+
+Una vegada fet aquests dos punts podeu activar l'entorn:
+
 ```
 .venv\Scripts\activate
 ```
