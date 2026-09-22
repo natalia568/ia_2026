@@ -6,8 +6,7 @@ class Aspirador(joc.JocNoGrafic):
         if agents is None:
             agents = []
         super(Aspirador, self).__init__(agents=agents)
-        # TODO
-
+    
 
     def _draw(self):
         # TODO
