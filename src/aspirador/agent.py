@@ -52,10 +52,16 @@ class AspiradorTaula(Aspirador):
 
 class AspiradorReflex(Aspirador):
     def actua(self, percepcio: dict):
-        """ TODO """
-
-
+        if not percepcio["Net"]: # si esta brut netegem 
+            return "A"
+        else: # si esta net
+            if percepcio["Loc"] == 0: # 
+                return "D"
+            else:
+                return "E"
 class AspiradorMemoria(Aspirador):
     def actua(self, percepcio: dict):
-        """ TODO """
-
+        memoria     ={"A":desconocido, "B":desconocido}
+            for i in habitacions:
+                if percepcio["Loc"]==i:
+                    habitacions[i]=percepcio["Net"]
