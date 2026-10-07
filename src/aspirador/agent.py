@@ -60,8 +60,19 @@ class AspiradorReflex(Aspirador):
             else:
                 return "E"
 class AspiradorMemoria(Aspirador):
+
+    def __init__(self):
+        super().__init__()
+
+        self.memoria = {
+            "A": None,
+            "B": None
+        }
+        
     def actua(self, percepcio: dict):
-        memoria     ={"A":desconocido, "B":desconocido}
-            for i in habitacions:
-                if percepcio["Loc"]==i:
-                    habitacions[i]=percepcio["Net"]
+
+        if percepcio["Loc"] == 0:
+            self.memoria["A"] = percepcio["Net"]
+
+        else:
+            self.memoria["B"] = percepcio["Net"]

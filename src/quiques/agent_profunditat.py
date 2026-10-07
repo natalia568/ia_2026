@@ -7,9 +7,65 @@ from quiques.agent import Barca
 from quiques.estat import Estat
 
 
+""" Fitxer que conté l'agent Barca.
+#  accions = [(0, 1), (0, 2), (1, 0), (1, 1), (2, 0)] # Poll, Llop
+Percepcions:
+    ClauPercepcio.LLOC
+    ClauPercepcio.QUICA_ESQ
+    ClauPercepcio.LLOP_ESQ
+    ClauPercepcio.QUICA_DRETA
+    ClauPercepcio.LLOP_DRETA
+
+Accions:
+    AccionsBarca.MOURE, (nombre_de_quiques, nombres_de_llop)
+    AccionsBarca.ATURA
+"""
 class BarcaProfunditat(Barca):
     def __init__(self):
         super(BarcaProfunditat, self).__init__()
 
+    def cerca(self, estat_inicial: Estat) -> bool:
+            self.__frontera = []
+            self.__tancats = set()
+            exit = False
+    
+            self.__frontera.append(estat_inicial)
+            while self.__frontera:
+                estat_actual = self.__frontera.pop(-1)
+    
+                if estat_actual in self.__tancats or not estat_actual.es_segur():
+                    continue
+    
+                if estat_actual.es_meta():
+                    break
+    
+                for f in estat_actual.genera_fill():
+                    self.__frontera.append(f)
+    
+                self.__tancats.add(estat_actual)
+    
+            if estat_actual.es_meta():
+                self.__cami_exit = estat_actual.cami
+                exit = True
+    
+            return exit
+
     def actua(self, percepcio: dict) -> str | tuple[str, (int, int)]:
-        pass
+        if self.__cami_exit is None:
+                 estat_inicial = Estat(
+                     local_barca=percepcio["Lloc"],
+                     llops_esq=percepcio["Llop Esq"],
+                     polls_esq=percepcio["Poll Esq"],
+                 )
+     
+                 self.cerca(estat_inicial)
+     
+        if self.__cami_exit:
+            quiques, llops = self.__cami_exit.pop(0)
+     
+            return "M", (quiques, llops)
+    
+        else:
+            return "A", None
+    
+        

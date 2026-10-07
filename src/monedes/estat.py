@@ -2,41 +2,35 @@ import copy
 
 
 class Estat:
-    MAX_ANIMALS = 3
 
     accions = [ ("D", 0), ("D", 1), ("D", 2), ("D", 3), ("D", 4),
-    ("G", 0), ("G", 1), ("G", 2), ("G", 3), ("G", 4),
-    ("B", 0), ("B", 1), ("B", 2), ("B", 3), ("B", 4)] # Poll, Llop
+                ("G", 0), ("G", 1), ("G", 2), ("G", 3), ("G", 4),
+                ("B", 0), ("B", 1), ("B", 2), ("B", 3), ("B", 4)]
 
-    def __init__(self, local_barca: str, llops_esq: int, polls_esq: int, cami=None):
+    def __init__(self, monedes: str, cost: int = 0, cami=None):
         if cami is None:
             cami = []
 
-        self.llops_esq = llops_esq
-        self.quica_esq = polls_esq
-        self.local_barca = local_barca
+        self.monedes = monedes
+        self.cost = cost
 
         self.cami = cami
 
     def __hash__(self):
-        return hash((self.llops_esq, self.quica_esq))
+        return hash(self.monedes)
 
     @staticmethod
-    def __canvi_posicio(lloc):
-        if lloc == "ESQ":
-            return "DRET"
+    def __gira(moneda):
+        if moneda   == "C":
+            return "X"
         else:
-            return "ESQ"
+            return "C"
 
 
-    @property
-    def llops_dreta(self):
-        return self.MAX_ANIMALS - self.llops_esq
+   
 
     @property
-    def quica_dreta(self):
-        return self.MAX_ANIMALS - self.quica_esq
-
+    
     def __eq__(self, other):
         """ Mètode per comparar dos estats.
 
