@@ -1,6 +1,6 @@
 [project]
 name = "ia2026"
-version = "0.1.0"
+version = "0.2.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.14"
@@ -12,8 +12,13 @@ dependencies = [
     "pandas>=2.3.3",
     "pandas-stubs~=2.3.3",
     "pygame-ce>=2.5.8",
-    "ialib",
+    "ialib>=0.3.1",
     "pipreqs>=0.5.0",
+    "datasets>=5.0.1",
+    "einops>=0.8.2",
+    "gymnasium>=1.4.0",
+    "scikit-learn>=1.9.1",
+    "matplotlib>=3.11.2",
 ]
 
 
@@ -31,5 +36,5 @@ packages = ["src/runner"]
 package = true
 
 [tool.uv.sources]
-ialib = { git = "https://github.com/miquelmn/iaLib" }
+ialib = { git = "https://github.com/miquelmn/ialib", rev = "a4d5665194626722ede0bb5b5fc5adf8ac538b9e" }
 
